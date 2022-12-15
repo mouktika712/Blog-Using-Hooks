@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { firestore } from "../firebase";
+import firestore from "../firebase";
+import { useFormInput } from "./hooks";
 
 function CreatePost() {
-    const [title, setTitle] = useState();
-    const [subtitle, setSubTitle] = useState();
-    const [content, setContent] = useState();
+    //an object title= {value, onchange()}
+    const title = useFormInput('');
+    const subtitle = useFormInput('');
+    const content = useFormInput('');
 
     function handleSubmit (e) {
         e.preventDefault();
@@ -15,9 +16,9 @@ function CreatePost() {
 
         // This will create a collection named 'posts' in firestore if not already present and add a post with the details provided.
         firestore.collection('posts').add({
-            title,
-            subtitle,
-            content,
+            title: title.value,
+            subtitle: subtitle.value,
+            content: content.value,
             createdAt: new Date()
         });
     }
@@ -29,17 +30,17 @@ function CreatePost() {
 
                 <div className="form-field">
                     <label>Title</label>
-                    <input value={title} onChange = {(e) => setTitle(e.target.value)} />
+                    <input {...title} />    
                 </div>
 
                 <div className="form-field">
                     <label>Subtitle</label>
-                    <input value={subtitle} onChange = {(e) => setSubTitle(e.target.value)} />
+                    <input {...subtitle} />
                 </div>
 
                 <div className="form-field">
                     <label>Content</label>
-                    <textarea value={content} onChange = {(e) => setContent(e.target.value)}></textarea>
+                    <textarea {...content}></textarea>
                 </div>
 
                 <button className="create-post-btn" type="submit">Create Post</button>
