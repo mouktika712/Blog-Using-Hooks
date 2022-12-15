@@ -1,20 +1,33 @@
 // in react-router-dom version 6: "Switch" is replaced by "Routes"
-import { Routes as Switch, Route } from 'react-router-dom';
-import {NavBar, CreatePost, PostDetail, Home} from './index';
+import { Routes, Route } from 'react-router-dom';
+import {NavBar, CreatePost, PostDetail, Home} from './index.js';
 
 
 function App() {
   return (
     <div className="container">
-      {/* NavBar is common to all the components so we are adding it above Switch and Routes */}
+      {/* NavBar is common to all the components so we are adding it above Routes */}
       <NavBar/>
-      <Switch>
-        <Route exact path = "/" component = {Home}/>
-        <Route exact path = "/post/:postId" component = {PostDetail}/>
-        <Route exact path = "/create-post" component = {CreatePost}/>
-      </Switch>
+      <Routes>
+        <Route path = '/' element = {<Home/>}/>
+        <Route path = '/post/:postId' element = {<PostDetail/>}/>
+        <Route path = '/create-post' element = {<CreatePost/>}/>
+      </Routes>
     </div>
   );
 }
 
 export default App;
+
+
+// import { Switch, Route } from 'react-router-dom';
+
+// function App() {
+//   return (
+//     <div className="container">
+//       React Blog With Hooks
+//     </div>
+//   );
+// }
+
+// export default App;
