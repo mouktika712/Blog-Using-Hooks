@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { firestore } from "../firebase";
 
 function CreatePost() {
     const [title, setTitle] = useState();
@@ -11,6 +12,14 @@ function CreatePost() {
         console.log('title', title);
         console.log('subtitle', subtitle);
         console.log('content', content);
+
+        // This will create a collection named 'posts' in firestore if not already present and add a post with the details provided.
+        firestore.collection('posts').add({
+            title,
+            subtitle,
+            content,
+            createdAt: new Date()
+        });
     }
     return (
         <div className="create-post">
