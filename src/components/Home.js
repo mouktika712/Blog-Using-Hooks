@@ -12,13 +12,14 @@ function Home() {
         .get()
         .then((snapshot) => {
             const posts = snapshot.docs.map((doc) => {
+                
                 return{
                     id: doc.id,
                     ...doc.data()
                 };
             });
 
-            console.log('posts', posts);
+            // console.log('posts', posts);
             setPosts(posts);
         });
     }, []);
@@ -29,7 +30,7 @@ function Home() {
 
             <div id="blog-by">Mouktika</div>
             {
-                // you always need to retun from a map() function
+                // you always need to return something from a map() function
                 posts.map((post, index) => {
                     return (
                         <div className="post" key={`post-${index}`}>
