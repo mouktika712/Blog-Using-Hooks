@@ -12,6 +12,7 @@ function PostDetail() {
 
     //Fetching the specific post from firestore using useEffect() hook
     useEffect(() => {
+        //note that snapshot itself is document here, so we can call data() over it
         firestore.collection('posts').doc(postId).get().then((snapshot) => {
             setPost(snapshot.data());
         });
